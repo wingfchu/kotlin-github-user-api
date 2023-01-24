@@ -1,6 +1,8 @@
 package com.wendychu.github_user_api.utils
 
+import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.appcompat.widget.SearchView
 import com.bumptech.glide.Glide
@@ -26,6 +28,11 @@ fun SearchView.getQueryChangeFlow(): StateFlow<String> {
 
     })
     return query
+}
+
+fun TextView.setTextAndVisibility(text: String?) {
+    visibility = if (text.isNullOrEmpty()) View.GONE else View.VISIBLE
+    text?.let { this.text = it }
 }
 
 fun ImageView.loadImage(@DrawableRes resId: Int) = Glide.with(this).load(resId).into(this)

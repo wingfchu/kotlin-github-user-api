@@ -34,4 +34,15 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/row_item_user" />
 
+    <TextView
+        android:id="@+id/tv_no_result"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingTop="20dp"
+        android:text="Not found"
+        android:textSize="16dp"
+        android:textAlignment="center"
+        android:visibility="gone"/>
+
 </LinearLayout>

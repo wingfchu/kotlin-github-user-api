@@ -2,8 +2,10 @@ package com.wendychu.github_user_api.ui.search
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.wendychu.github_user_api.R
 import com.wendychu.github_user_api.data.model.UserItemModel
 import com.wendychu.github_user_api.databinding.FragmentUserSearchBinding
@@ -35,7 +37,7 @@ class UserSearchFragment : Fragment(R.layout.fragment_user_search) {
 
     private fun setupObserver() {
         viewModel.userSearchResult.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
+            setResultLayout(it)
         }
     }
 
@@ -44,5 +46,19 @@ class UserSearchFragment : Fragment(R.layout.fragment_user_search) {
     }
 
     private fun onUserItemClick(user: UserItemModel) {
+        val bundle = bundleOf("user" to user.username)
+        findNavController().navigate(R.id.action_userSearchFragment_to_userDetailFragment, bundle)
+    }
+
+    private fun setResultLayout(list: List<UserItemModel>){
+        if (list.isEmpty()){
+            binding.tvNoResult.visibility = View.VISIBLE
+            binding.rvUserSearch.visibility = View.GONE
+        } else {
+            binding.tvNoResult.visibility = View.GONE
+            binding.rvUserSearch.visibility = View.VISIBLE
+            adapter.submitList(list)
+        }
+
     }
 }
