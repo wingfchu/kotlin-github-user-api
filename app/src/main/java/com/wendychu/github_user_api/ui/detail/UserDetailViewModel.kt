@@ -5,6 +5,9 @@ import androidx.lifecycle.*
 import com.wendychu.github_user_api.data.Resource
 import com.wendychu.github_user_api.data.remote.GithubRepository
 import com.wendychu.github_user_api.data.remote.model.UserDetailResponse
+import com.wendychu.github_user_api.utils.LiveEvent
+import com.wendychu.github_user_api.utils.MutableLiveEvent
+import com.wendychu.github_user_api.utils.postEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -18,6 +21,9 @@ class UserDetailViewModel @Inject constructor(
     private val _userDetail = MutableLiveData<UserDetailResponse>()
     val userDetail: LiveData<UserDetailResponse> get() = _userDetail
 
+    private val _uiEvent = MutableLiveEvent<UserDetailEvent>()
+    val uiEvent : LiveEvent<UserDetailEvent> get() = _uiEvent
+
     fun getUserDetail(userName: String) {
         viewModelScope.launch {
             repository.getUserDetail(userName).collect{ result ->
@@ -30,6 +36,12 @@ class UserDetailViewModel @Inject constructor(
                     }
                 }
             }
+        }
+    }
+
+    fun shareProfile() {
+        _userDetail.value?.let {
+            _uiEvent.postEvent(UserDetailEvent.ShareProfile(it.htmlUrl))
         }
     }
 

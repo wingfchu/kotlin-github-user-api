@@ -37,7 +37,7 @@ class UserSearchFragment : Fragment(R.layout.fragment_user_search) {
 
     private fun setupObserver() {
         viewModel.userSearchResult.observe(viewLifecycleOwner) {
-            setResultLayout(it)
+            adapter.submitList(it)
         }
     }
 
@@ -50,15 +50,4 @@ class UserSearchFragment : Fragment(R.layout.fragment_user_search) {
         findNavController().navigate(R.id.action_userSearchFragment_to_userDetailFragment, bundle)
     }
 
-    private fun setResultLayout(list: List<UserItemModel>){
-        if (list.isEmpty()){
-            binding.tvNoResult.visibility = View.VISIBLE
-            binding.rvUserSearch.visibility = View.GONE
-        } else {
-            binding.tvNoResult.visibility = View.GONE
-            binding.rvUserSearch.visibility = View.VISIBLE
-            adapter.submitList(list)
-        }
-
-    }
 }

@@ -35,7 +35,8 @@ class UserSearchViewModel @Inject constructor(
                                 UserItemModel(it.id, it.login, it.avatarUrl)
                             }
                         }
-                    }                }
+                    }
+                }
                 .collect { result ->
                     when (result) {
                         is Resource.Success -> {

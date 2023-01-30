@@ -5,25 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.search.UserSearchFragment">
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardElevation="6dp">
-
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/search_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:queryBackground="@android:color/transparent"
-            app:iconifiedByDefault="false"
-            app:queryHint="Search User" />
-    </androidx.cardview.widget.CardView>
-
+    tools:context=".ui.social.UserSocialFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_user_search"
+        android:id="@+id/rv_user_social"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
